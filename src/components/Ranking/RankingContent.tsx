@@ -1,12 +1,13 @@
 import { Flex, Text } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
+import { FaArrowDownWideShort, FaArrowDownShortWide } from 'react-icons/fa6';
 import {
   AsyncBoundary,
   ErrorFallback,
   ListFallback,
 } from '@/components/common';
 import { useSort } from '@/store/sort';
-import { KIND_OF_DUST, ERROR_MESSAGE, SORT_TYPE } from '@/utils/constants';
+import { KIND_OF_DUST, ERROR_MESSAGE } from '@/utils/constants';
 import SelectTabList from './SelectTabList';
 
 interface RankingContentProps {
@@ -18,6 +19,17 @@ const RankingContent = ({
   backgroundColor,
 }: PropsWithChildren<RankingContentProps>) => {
   const { dustType, setDustType, setSortType } = useSort();
+
+  const selectOption = [
+    {
+      options: '오름차순',
+      icon: FaArrowDownShortWide,
+    },
+    {
+      options: '내림차순',
+      icon: FaArrowDownWideShort,
+    },
+  ];
 
   return (
     <Flex
@@ -49,7 +61,7 @@ const RankingContent = ({
       <SelectTabList
         selectTabList={KIND_OF_DUST}
         handleClickTab={setDustType}
-        selectOption={SORT_TYPE}
+        selectOption={selectOption}
         handleClickOption={setSortType}
       />
       <AsyncBoundary
